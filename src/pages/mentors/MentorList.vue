@@ -1,19 +1,24 @@
 <template>
   <section>Filter</section>
   <section>
-    <div class="control">
-      <button>Refresh</button>
-      <router-link to="/signup">Register</router-link>
-    </div>
-    <ul v-if="isMentor">
-      <li v-for="mentor in filteredMentors" :key="mentor.id">
-        <mentor-item
-          :rate="mentor.hourlyRate"
-          :areas="mentor.areas"
-        ></mentor-item>
-      </li>
-    </ul>
-    <h3 v-else>No Mentor is there</h3>
+    <base-card>
+      <div class="controls">
+        <button>Refresh</button>
+        <router-link to="/signup">Register</router-link>
+      </div>
+      <ul v-if="isMentor">
+        <li v-for="mentor in filteredMentors" :key="mentor.id">
+          <mentor-item
+            :rate="mentor.hourlyRate"
+            :areas="mentor.areas"
+            :first-name="mentor.firstName"
+            :last-name="mentor.lastName"
+            :id="mentor.id"
+          ></mentor-item>
+        </li>
+      </ul>
+      <h3 v-else>No Mentor is there</h3>
+    </base-card>
   </section>
 </template>
 
@@ -33,3 +38,14 @@ export default {
   },
 };
 </script>
+<style scoped>
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+</style>
