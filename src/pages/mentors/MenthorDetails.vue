@@ -8,7 +8,7 @@
   <section>
     <base-card>
       <header>
-        <h2>Intrested? Call me,Now!</h2>
+        <h2>Intrested? Send me a Message,Now!</h2>
         <base-button link :to="contactLink">Contact</base-button>
       </header>
       <router-view></router-view>

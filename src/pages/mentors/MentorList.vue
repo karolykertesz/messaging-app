@@ -6,7 +6,9 @@
     <base-card>
       <div class="controls">
         <base-button mode="outline">Refresh</base-button>
-        <base-button link to="/signup">Register</base-button>
+        <base-button link to="/signup" v-if="!isValidMentor"
+          >Register</base-button
+        >
       </div>
       <ul v-if="isMentor">
         <li v-for="mentor in filteredMentors" :key="mentor.id">
@@ -36,22 +38,26 @@ export default {
     return {
       activeFilters: {
         frontend: true,
-        beckend: true,
+        backend: true,
         career: true,
       },
     };
   },
   computed: {
+    isValidMentor() {
+      return this.$store.getters['mentors/isMentor'];
+    },
     isMentor() {
       return this.$store.getters['mentors/hasMentor'];
     },
     filteredMentors() {
       const mentors = this.$store.getters['mentors/mentors'];
+      console.log(mentors);
       return mentors.filter((mentor) => {
         if (this.activeFilters.frontend && mentor.areas.includes('frontend')) {
           return true;
         }
-        if (this.activeFilters.beckend && mentor.areas.includes('backend')) {
+        if (this.activeFilters.backend && mentor.areas.includes('backend')) {
           return true;
         }
         if (this.activeFilters.career && mentor.areas.includes('career')) {

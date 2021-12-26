@@ -12,8 +12,8 @@
       <label for="frontend">Frontend</label>
     </span>
     <span class="filter-option">
-      <input type="checkbox" name="" id="beckend" checked @change="setFilter" />
-      <label for="back">BeckEnd</label>
+      <input type="checkbox" name="" id="backend" checked @change="setFilter" />
+      <label for="backend">BeckEnd</label>
     </span>
     <span class="filter-option">
       <input type="checkbox" name="" id="career" checked @change="setFilter" />
@@ -29,7 +29,7 @@ export default {
     return {
       filters: {
         frontend: true,
-        beckend: true,
+        backend: true,
         career: true,
       },
     };
