@@ -5,11 +5,13 @@
     </h3>
     <h4>${{ rate }}/hour</h4>
     <div>
-      <span v-for="area in areas" :key="area">{{ area }} </span>
+      <base-badge v-for="area in areas" :key="area" :type="area" :title="area"
+        >{{ area }}
+      </base-badge>
     </div>
     <div class="actions">
-      <router-link :to="contactLick">Contact</router-link>
-      <router-link :to="detailLink">View details</router-link>
+      <base-button :to="contactLick" mode="outline" link>Contact</base-button>
+      <base-button link :to="detailLink">View details</base-button>
     </div>
   </li>
 </template>

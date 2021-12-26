@@ -1,10 +1,12 @@
 <template>
-  <section>Filter</section>
+  <section>
+    <mentor-filter @change-filter="updateFilters"></mentor-filter>
+  </section>
   <section>
     <base-card>
       <div class="controls">
-        <button>Refresh</button>
-        <router-link to="/signup">Register</router-link>
+        <base-button mode="outline">Refresh</base-button>
+        <base-button link to="/signup">Register</base-button>
       </div>
       <ul v-if="isMentor">
         <li v-for="mentor in filteredMentors" :key="mentor.id">
@@ -24,16 +26,44 @@
 
 <script>
 import MentorItem from '../../components/mentors/MentorItem.vue';
+import MentorFilter from '../../pages/mentors/MentorFilter.vue';
 export default {
   components: {
     MentorItem,
+    MentorFilter,
+  },
+  data() {
+    return {
+      activeFilters: {
+        frontend: true,
+        beckend: true,
+        career: true,
+      },
+    };
   },
   computed: {
     isMentor() {
       return this.$store.getters['mentors/hasMentor'];
     },
     filteredMentors() {
-      return this.$store.getters['mentors/mentors'];
+      const mentors = this.$store.getters['mentors/mentors'];
+      return mentors.filter((mentor) => {
+        if (this.activeFilters.frontend && mentor.areas.includes('frontend')) {
+          return true;
+        }
+        if (this.activeFilters.beckend && mentor.areas.includes('backend')) {
+          return true;
+        }
+        if (this.activeFilters.career && mentor.areas.includes('career')) {
+          return true;
+        }
+        return false;
+      });
+    },
+  },
+  methods: {
+    updateFilters(updatedFilters) {
+      this.activeFilters = updatedFilters;
     },
   },
 };

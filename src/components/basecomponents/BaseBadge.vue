@@ -1,6 +1,17 @@
 <template>
-  <slot></slot>
+  <span class="badge" :class="type">{{ text }}</span>
 </template>
+
+<script>
+export default {
+  props: ['type', 'title'],
+  computed: {
+    text() {
+      return this.title.toUpperCase();
+    },
+  },
+};
+</script>
 
 <style scoped>
 .badge {
@@ -16,7 +27,6 @@
   background-color: rgba(83, 235, 78, 0.68);
   color: white;
 }
-
 .backend {
   background-color: rgba(5, 40, 4, 0.68);
   color: white;
